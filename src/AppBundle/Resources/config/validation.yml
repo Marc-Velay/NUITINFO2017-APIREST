@@ -1,0 +1,8 @@
+AppBundle\Entity\Post:
+    properties:
+        titre:
+            - NotBlank: ~
+            - Type: string
+        texte:
+            - NotBlank: ~
+            - Type: string

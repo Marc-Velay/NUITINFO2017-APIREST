@@ -1,0 +1,32 @@
+AppBundle\Entity\Comment:
+    attributes:
+        id:
+            groups: ['comment', 'post']
+        texte:
+            groups: ['comment', 'post']
+
+AppBundle\Entity\Post:
+    attributes:
+        id:
+            groups: ['post']
+        titre:
+            groups: ['post']
+        texte:
+            groups: ['post']
+        comments:
+            groups: ['post']
+        user:
+            groups: ['post']
+
+AppBundle\Entity\User:
+    attributes:
+        id:
+            groups: ['post', 'user']
+        username:
+            groups: ['user', 'post']
+        email:
+            groups: ['user']
+        posts:
+            groups: ['user']
+        comments:
+            groups: ['user']
