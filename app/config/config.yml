@@ -128,3 +128,5 @@ easy_admin:
         - AppBundle\Entity\Comment
         - AppBundle\Entity\Post
         - AppBundle\Entity\User
+
+nelmio_api_doc: ~

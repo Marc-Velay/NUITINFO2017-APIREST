@@ -19,6 +19,9 @@ security:
         register:                                   # Everyone can access the access token URL.
             pattern: ^/api/register
             security: false
+        doc:                                   # Everyone can access the access token URL.
+            pattern: ^/api/doc
+            security: false
 
         api:
             pattern: ^/api                                # All URLs are protected

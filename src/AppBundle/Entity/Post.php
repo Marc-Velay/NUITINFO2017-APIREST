@@ -15,6 +15,8 @@ class Post
     /**
      * @var int
      *
+     * Identifiant unique du Post
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -22,14 +24,18 @@ class Post
     private $id;
 
     /**
-     * @var string
      *
+     * titre du Post
+     *
+     * @var string
      * @ORM\Column(name="titre", type="string", length=255)
      */
     private $titre;
 
     /**
      * @var string
+     *
+     * description du Post
      *
      * @ORM\Column(name="texte", type="string", length=255)
      */

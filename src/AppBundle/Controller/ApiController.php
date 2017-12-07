@@ -6,6 +6,7 @@ use AppBundle\Entity\Comment;
 use AppBundle\Entity\Post;
 use AppBundle\Form\CommentType;
 use AppBundle\Form\PostType;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use FOS\UserBundle\Model\User;
@@ -28,6 +29,25 @@ class ApiController extends Controller
     /**
      * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"post"})
      * @Rest\Get("/post/{id}")
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Retourne le post associé à l'id",
+     *  section="Posts",
+     *  requirements={
+     *         {
+     *             "name"="id",
+     *             "dataType"="integer",
+     *             "requirements"="\d+",
+     *             "description"="The post unique identifier."
+     *         }
+     *     },
+     *  output="AppBundle\Entity\Post",
+     *  statusCodes={
+     *         200="Returned when everything works",
+     *         400="Returned when a violation is raised by validation",
+     *         401="Returned when the user is not autenticated"
+     *     }
+     * )
      */
     public function getPostAction(Post $post)
     {
@@ -40,6 +60,17 @@ class ApiController extends Controller
     /**
      * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"post"})
      * @Rest\Get("/posts")
+     * @ApiDoc(
+     *  resource=true,
+     *  section="Posts",
+     *  description="Retourne tout les posts en BDD",
+     *  output="AppBundle\Entity\Post",
+     *  statusCodes={
+     *         200="Returned when everything works",
+     *         400="Returned when a violation is raised by validation",
+     *         401="Returned when the user is not autenticated"
+     *     }
+     * )
      */
     public function getPostsAction()
     {
@@ -56,6 +87,25 @@ class ApiController extends Controller
     /**
      * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"post"})
      * @Rest\Get("user/{id}/posts")
+     * @ApiDoc(
+     *  resource=true,
+     *  section="Posts et Users",
+     *  description="Retourne tout les posts de l'utilisateur id",
+     *  output="AppBundle\Entity\Post",
+     *  requirements={
+     *         {
+     *             "name"="id",
+     *             "dataType"="integer",
+     *             "requirements"="\d+",
+     *             "description"="The user unique identifier."
+     *         }
+     *     },
+     *  statusCodes={
+     *         200="Returned when everything works",
+     *         400="Returned when a violation is raised by validation",
+     *         401="Returned when the user is not autenticated"
+     *     }
+     * )
      */
     public function getUserPostsAction($id)
     {
@@ -72,6 +122,29 @@ class ApiController extends Controller
     /**
      * @Rest\View(statusCode=Response::HTTP_CREATED,  serializerGroups={"post"})
      * @Rest\Post("post")
+     * @ApiDoc(
+     *  resource=true,
+     *  section="Posts",
+     *  description="Ajoute un Post",
+     *  output="AppBundle\Entity\Post",
+     *  requirements={
+     *         {
+     *             "name"="titre",
+     *             "dataType"="string",
+     *             "description"="Le titre du Post"
+     *         },
+     *         {
+     *             "name"="description",
+     *             "dataType"="text",
+     *             "description"="La description du Post"
+     *         }
+     *     },
+     *  statusCodes={
+     *         201="Returned when a post is created",
+     *         400="Returned when a violation is raised by validation",
+     *         401="Returned when the user is not autenticated"
+     *     }
+     * )
      */
     public function postPostAction(Request $request)
     {
@@ -96,6 +169,16 @@ class ApiController extends Controller
     /**
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
      * @Rest\Delete("/post/{id}")
+     * @ApiDoc(
+     *  resource=true,
+     *  section="Posts",
+     *  description="Supprime le post associé à id",
+     *  statusCodes={
+     *         204="Returned when the post is deleted",
+     *         400="Returned when a violation is raised by validation",
+     *         401="Returned when the user is not autenticated"
+     *     }
+     * )
      */
     public function deletePostAction(Post $post)
     {
@@ -111,6 +194,16 @@ class ApiController extends Controller
     /**
      * @Rest\View(statusCode=Response::HTTP_OK,  serializerGroups={"post"})
      * @Rest\Put("/post/{id}")
+     * @ApiDoc(
+     *  resource=true,
+     *  section="Posts",
+     *  description="Modifie le post associé à id",
+     *  statusCodes={
+     *         200="Returned when the post is deleted",
+     *         400="Returned when a violation is raised by validation",
+     *         401="Returned when the user is not autenticated"
+     *     }
+     * )
      */
     public function putPostAction(Request $request, Post $post)
     {
@@ -135,7 +228,17 @@ class ApiController extends Controller
 
     /**
      * @Rest\View(statusCode=Response::HTTP_OK)
-     * @Rest\Patch("/post{id}")
+     * @Rest\Patch("/post/{id}")
+     * @ApiDoc(
+     *  resource=true,
+     *  section="Posts",
+     *  description="Modifie le post associé à id",
+     *  statusCodes={
+     *         200="Returned when the post is deleted",
+     *         400="Returned when a violation is raised by validation",
+     *         401="Returned when the user is not autenticated"
+     *     }
+     * )
      */
     public function patchPostAction(Request $request, Post $post)
     {
@@ -161,6 +264,16 @@ class ApiController extends Controller
     /**
      * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"user"})
      * @Rest\Get("/users")
+     * @ApiDoc(
+     *  resource=true,
+     *  section="Users",
+     *  description="Retourne tout les utilisateurs",
+     *  statusCodes={
+     *         200="Returned when everything is OK",
+     *         400="Returned when a violation is raised by validation",
+     *         401="Returned when the user is not autenticated"
+     *     }
+     * )
      */
     public function getUsersAction()
     {
